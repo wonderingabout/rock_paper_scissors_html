@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Let's play Rock Paper Scissors!!!</title>
+        <script>
+            "use strict";
+
+            const moves =  [ { id: 1, name: "Rock",     rule: 3 },
+                             { id: 2, name: "Paper",    rule: 1 },
+                             { id: 3, name: "Scissors", rule: 2 }
+                           ];
+            const timers = { total: 3 };
+            const scores = { player:   0,
+                             computer: 0
+                           };
+
+            start();
+
+            function start() {
+                const player   = getValidPlayer(moves);
+                const computer = getValidRandomComputer(moves);
+
+                timers.i = 0;
+                processEndGame(player, computer, moves, timers, scores);
+            }
+
+            function getPromptedPlayerNum(moves) {
+                const movesDescr = moves.map( (e) => `${e.name}: ${e.id}\n`)
+                                        .join("");
+                const greeting   = `${movesDescr}\nLet's Play!`;
+
+                const result = prompt(greeting);
+                return parseInt(result);
+            }
+
+            function checkPlayerIsValid(result, moves) {
+                const ids = moves.map( (e) => e.id );
+                return (ids.includes(result));
+            }
+
+            function testValidPlayer(moves) {
+                const result = getPromptedPlayerNum(moves);
+                if (!checkPlayerIsValid(result, moves)) {
+                    const validMoves = moves.map( (e) => e.id)
+                                            .join(', ');
+                    alert(`Please enter one of these valid moves:\n${validMoves}.`);
+                    return;
+                }
+                return result;
+            }
+
+            function getValidPlayer(moves) {
+                const player = testValidPlayer(moves);
+                if (player) return player;
+                return getValidPlayer(moves);
+            }
+
+            function getValidRandomComputer(moves) {
+                const biggestId = moves[moves.length - 1].id;
+                return Math.floor((Math.random() * biggestId) + 1);
+            }
+
+            function displayOneCountdownInHtml(timers) {
+                document.body.innerHTML += `${timers.i + 1}.....<br/>`;
+            }
+
+            function processOneCountdownInHtml(timers) {
+                displayOneCountdownInHtml(timers);
+                timers.i++;
+            }
+
+            function checkFullCountdownIsFinished(timers) {
+                return ((timers.i + 1) > timers.total);
+            }
+
+            function getRoundWinner(player, computer, moves) {
+                if (player === computer)                 return "Tie";
+                if (moves[player - 1].rule === computer) return "You Win!";
+                return "Computer Wins!";
+            }
+
+            function displayRoundWinnerInHtml(player, computer, moves) {
+                const playerName   = moves[player - 1].name;
+                const computerName = moves[computer - 1].name;
+                document.body.innerHTML += `${playerName} VS ${computerName} <br/>`;
+
+                const roundWinner = getRoundWinner(player, computer, moves);
+                document.body.innerHTML += `${roundWinner} <br/>`;
+            }
+
+            function updateScores(player, computer, moves, scores) {
+                if (player === computer) return;
+                if (moves[player - 1].rule === computer) {
+                    scores.player++;
+                    return;
+                } else {
+                    scores.computer++;
+                    return;
+                }
+            }
+
+            function checkIsNextRound() {
+                return confirm("Try again ?");
+            }
+
+            function processNextRound() {
+                setTimeout(function() {
+                    if (checkIsNextRound()) {
+                        start();
+                    } else {
+                        displayFinalScoresInHtml(scores);
+                    }
+                }, 2000);
+            }
+
+            function displayFinalScoresInHtml(scores) {
+                document.body.innerHTML += `Scores <br/>`;
+                document.body.innerHTML += `Player: ${scores.player} <br/>`;
+                document.body.innerHTML += `Computer: ${scores.computer} <br/>`;
+            }
+
+            function processEndGame(player, computer, moves, timers, scores) {
+                const fullCountdownTimer = setInterval(processOneCountdownInHtml, 1000, timers);
+
+                const stopFullCountdownTimer = setInterval(function() {
+                    if (checkFullCountdownIsFinished(timers)) {
+                        clearInterval(fullCountdownTimer);
+                        clearInterval(stopFullCountdownTimer);
+
+                        displayRoundWinnerInHtml(player, computer, moves);
+
+                        updateScores(player, computer, moves, scores);
+
+                        processNextRound();
+                    }
+                }, 100);
+            }
+        </script>
+    </head>
+    <body>
+        <h1>hello!! Welcome to play rock paper scissors!!!</h1>
+        <p>Let's have fun playing this millenial game!!!</p>
+        <a href="https://en.wikipedia.org/wiki/Rock_paper_scissors">click here if you're curious <br/></a>
+    </body>
+</html>

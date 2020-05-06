@@ -12,4 +12,6 @@ Using:
 
 There are many possible paths of improvements, but it's satisfying and achieved its goals.
 
-Feel free to share :)
+Enjoy!
+
+And feel free to share :)

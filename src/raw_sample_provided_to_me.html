@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            var rock = 1;
+            var paper = 2;
+            var scissors = 3;
+            var names = { [rock]: "Pierre", [paper]: "Papier", [scissors]: "Ciseaux"};
+            var rules = { [rock]: scissors, [paper]: rock, [scissors]: paper };
+
+            var player_score = 0, computer_score = 0;
+
+            window.onload = function() {
+                start();
+            }
+
+            function start() {
+                var player = move();
+                var computer = Math.floor((Math.random() * 3) + 1)
+                result(player, computer);
+            }
+
+            function move() {
+                while (true) {
+                    var player = parseInt(prompt('Pierre = 1\n Papier = 2\nCiseaux = 3\nJouez'));
+                    if([1,2,3].includes(player)) {
+                        return player;
+                    } else {
+                        alert("Vous devez entrer 1, 2, ou 3!!!");
+                    }
+                }
+            }
+
+            function result(player, computer) {
+                document.body.innerHTML += "1.....<br/>";
+                setTimeout(function(){result_suit(player, computer)}, 1000);
+            }
+
+            function result_suit(player, computer) {
+                document.body.innerHTML += "2.....<br/>";
+                setTimeout(function(){result_suit2(player, computer)}, 1000);
+            }
+
+            function result_suit2(player, computer) {
+                document.body.innerHTML += "3.....<br/>";
+                document.body.innerHTML += names[player] + " VS " + names[computer] + "<br/>";
+                if (player === computer) {
+                    document.body.innerHTML += "Egalité <br/>";
+                } else {
+                    if (rules[player] === computer) {
+                        player_score++;
+                        document.body.innerHTML += "Vous avez gagné <br/>";
+                    } else {
+                        computer_score++;
+                        document.body.innerHTML += "L'ordinateur a gagné <br/>";
+                    }
+                }
+                setTimeout(function () {
+                    if (confirm("Recommencer ?")) {
+                        start();
+                    } else {
+                        scores();
+                    }
+                }, 2000);
+            }
+
+            function scores() {
+                document.body.innerHTML += "Scores <br/>";
+                document.body.innerHTML += "Joueur: " + player_score + "<br/>";
+                document.body.innerHTML += "Ordinateur: " + computer_score + "<br/>";
+            }
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
