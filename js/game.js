@@ -132,7 +132,7 @@ function processNextRound(moves, timers, scores, names) {
 }
 
 function getFinalScoresCommentaryHtml(scores) {
-    if (scores.player === scores.computer) return `&#x1F970;&#x1F91D;&#x1F917;&#x;&#x1F917;&#x1F91D;&#x1F970;<br/>`;
+    if (scores.player === scores.computer) return `&#x1F970;&#x1F91D;&#x1F917;&#x1F380;&#x1F917;&#x1F91D;&#x1F970;<br/>`;
     if (scores.player > scores.computer)   return `&#x1F3C6;&#x1F3C5;&#x1F60E;&#x1F624;&#x1F60E;&#x1F3C5;&#x1F3C6;<br/>`;
     return `&#x2614;&#x1F62D;&#x1F37C;&#x1F927;&#x1F37C;&#x1F62D;&#x2614;<br/>`;
 }
