@@ -6,8 +6,8 @@
         <script>
             "use strict";
 
-            const moves =  [ { id: 1, name: "Rock",     rule: 3 },
-                             { id: 2, name: "Paper",    rule: 1 },
+            const moves =  [ { id: 1, name: "Rock"    , rule: 3 },
+                             { id: 2, name: "Paper"   , rule: 1 },
                              { id: 3, name: "Scissors", rule: 2 }
                            ];
             const timers = { total: 3 };
@@ -26,7 +26,7 @@
             }
 
             function getPromptedPlayerNum(moves) {
-                const movesDescr = moves.map( (e) => `${e.name}: ${e.id}\n`)
+                const movesDescr = moves.map( (e) => `${e.name}: ${e.id}\n` )
                                         .join("");
                 const greeting   = `${movesDescr}\nLet's Play!`;
 

@@ -7,7 +7,7 @@ function getPromptedPlayerName(names) {
 
 function playGame() {
     const moves =  [ { id: 1, name: "Rock"    , emojiHtml: "&#x1F44A;", rule: 3 },
-                     { id: 2, name: "Paper"   , emojiHtml: "&#x1F4DC" , rule: 1 },
+                     { id: 2, name: "Paper"   , emojiHtml: "&#x1F4DC;", rule: 1 },
                      { id: 3, name: "Scissors", emojiHtml: "&#x2702;" , rule: 2 }
                    ];
     const timers = { total: 3,
@@ -36,7 +36,7 @@ function start(moves, timers, scores, names) {
 }
 
 function getPromptedPlayerNum(moves) {
-    const movesDescr = moves.map( (e) => `${e.name}: ${e.id}\n`)
+    const movesDescr = moves.map( (e) => `${e.name}: ${e.id}\n` )
                             .join("");
     const greeting   = `${movesDescr}\nLet's Play!`;
 
@@ -138,12 +138,13 @@ function getFinalScoresCommentaryHtml(scores) {
 }
 
 function displayFinalScoresInHtml(scores, names) {
-    document.body.innerHTML += `<div id="result"></div>`;
+    const resultId = "result";
+    document.body.innerHTML += `<div id="${resultId}"></div>`;
 
-    document.getElementById("result").innerHTML += `<br/>Game Result:<br/>`;
-    document.getElementById("result").innerHTML += `${names.player}: ${scores.player}<br/>`;
-    document.getElementById("result").innerHTML += `${names.computer}: ${scores.computer}<br/>`;
-    document.getElementById("result").innerHTML += getFinalScoresCommentaryHtml(scores);
+    document.getElementById(resultId).innerHTML += `<br/>Game Result:<br/>`;
+    document.getElementById(resultId).innerHTML += `${names.player}: ${scores.player}<br/>`;
+    document.getElementById(resultId).innerHTML += `${names.computer}: ${scores.computer}<br/>`;
+    document.getElementById(resultId).innerHTML += getFinalScoresCommentaryHtml(scores);
 }
 
 function processEndGame(player, computer, moves, timers, scores, names) {
