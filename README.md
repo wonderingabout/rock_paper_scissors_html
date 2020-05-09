@@ -1,13 +1,18 @@
 # Play
 
-You can play the game on this website:
-<https://wonderingabout.github.io/rock_paper_scissors_html/>
+You can play the game [on this website](https://wonderingabout.github.io/rock_paper_scissors_html/)
 
 No need to download it, works as is!
 
 ## About
 
-A way to love diligent and devoted programming more, and fighting for beautiful code style more
+### Refactoring
+
+A way to love diligent and devoted programming more, and fighting for beautiful code style more.
+
+See raw sample provided to me [here](/src/raw_sample_provided_to_me.html)
+
+### Front-end
 
 Also to get familiar with front-end techs
 
